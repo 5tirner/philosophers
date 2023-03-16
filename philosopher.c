@@ -6,95 +6,86 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/16 14:46:59 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/16 16:17:08 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-pthread_mutex_t	mutex;
 unsigned long	x;
 
-void	*sleeping(void *time_to_sleep)
+void	eating(t_time *times)
 {
-	int	i = 0;
-	int	*t = (int *)time_to_sleep;
-
-	while (i < *t)
+	int	j;
+	
+	j = 0;
+	printf("philo %d start eating in the time %lu\n", times->i, x);
+	while (j < times->time_to_eat)
 	{
-		pthread_mutex_lock(&mutex);
-		i++;
+		pthread_mutex_lock(&times->mutex);
+		j++;
 		x++;
-		pthread_mutex_unlock(&mutex);
+		pthread_mutex_destroy(&times->mutex);
 	}
-	return (0);
+	printf("philo %d ends in the time: %lu\n", times->i, x);
 }
 
-void	*eat(void *time_to_eat)
+void	sleeping(t_time *times)
 {
-	int i = 0;
-	int	*t = (int *)time_to_eat;
-	while(i < *t)
+	int	j;
+	
+	j = 0;
+	printf("philo %d start sleeping in the time %lu\n", times->i, x);
+	while (j < times->time_to_sleep)
 	{
-		pthread_mutex_lock(&mutex);
-		i++;
+		pthread_mutex_lock(&times->mutex);
+		j++;
 		x++;
-		//printf("%d", x);
-		pthread_mutex_unlock(&mutex);
+		pthread_mutex_destroy(&times->mutex);
 	}
+	printf("philo %d weak uo at time: %lu\n", times->i, x);
+}
+
+void	*cyrcle(void *times)
+{
+	t_time	*time;
+	
+	time = (t_time *)times;
+	eating(time);
+	sleeping(time);
 	return (0);
 }
 
 int main(int ac, char **av)
 {
-	// pthread_t t1, t2;
-	// //pthread_mutex_init(&mutex, NULL);
-	// pthread_create(&t1, NULL, rt, NULL);
-	// pthread_create(&t2, NULL, rt, NULL);
-	// pthread_join(t1, NULL);
-	// pthread_join(t2, NULL);
-	// //pthread_mutex_destroy(&mutex);
-	// printf("%d", x);
-	if (ac >= 3)
+	t_time		times;
+	pthread_t	*philo;
+	int			philo_nbr;
+	if (ac >= 4)
 	{
-		t_time		times;
-		int			k = atoi(av[1]);
-		int 		p = atoi(av[2]);
-		int			r = atoi(av[3]);
-		pthread_t	philo[k];
-		int			i;
-
-		i = 1;
-		pthread_mutex_init(&mutex, NULL);
-		while (i <= k)
+		philo_nbr = ft_atoi(av[1]);
+		philo = malloc(philo_nbr);
+	 	times.time_to_eat = ft_atoi(av[2]);
+		times.time_to_sleep = ft_atoi(av[3]);
+		times.i = 1;
+		
+		while (times.i <= philo_nbr)
 		{
-			if (pthread_create(&philo[i], NULL, &eat, &p))
+			pthread_mutex_init(&times.mutex, NULL);
+			printf("Philo %d takes a fork\n", times.i);
+			if (pthread_create(&philo[times.i], NULL, &cyrcle, &times))
 			{
 				printf("Thread created is failed\n");
 				return (1);
 			}
-			printf("philo number %d is eating\n", i);
-			if (pthread_join(philo[i], NULL))
+			if (pthread_join(philo[times.i], NULL))
 			{
-				printf("Somthing wrog with this thread\n");
+				printf("Somthing unexpected is happen\n");
 				return (1);
 			}
-			printf("This philo go to sleep at the time %lu\n", x);
-			if (pthread_create(&philo[i], NULL, &sleeping, &r))
-			{
-				printf("Thread created is failed\n");
-				return (1);
-			}
-			printf("this philo still sleeping..\n");
-			if (pthread_join(philo[i], NULL))
-			{
-				printf("Somthing wrong with this philo\n");
-				return (1);
-			}
-			i++;
+			pthread_mutex_destroy(&times.mutex);
+			times.i++;
 		}
-		printf("number of seconds that the philos need %lu", x);
-		pthread_mutex_destroy(&mutex);
 	}
 	else
 	{

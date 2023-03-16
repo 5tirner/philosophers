@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:00:42 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/15 15:01:11 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/16 15:32:48 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_philosopher
 }	philosopher;
 
 int	z = 0;
+
 void	*r1(void *x)
 {
 	philosopher *y = (philosopher *) x;
@@ -28,8 +29,6 @@ void	*r1(void *x)
 		printf("HI X=%d : %d\n", y->id, z++);
 		x++;
 	}
-	
-	
 	return 0;
 }
 
