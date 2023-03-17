@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/16 17:39:52 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/17 11:14:17 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	eating(t_time *times)
 	int	j;
 	
 	j = 0;
-	//printf("befor\n");
 	printf("philo %d start eating in the time %lu\n", times->i, x);
-	//printf("here1\n");
 	while (j < times->time_to_eat)
 	{
 		pthread_mutex_lock(&times->mutex);
