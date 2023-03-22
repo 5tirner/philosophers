@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/22 09:34:09 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/22 09:45:55 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,27 @@ void	init_times(int ac, char **av, t_infos *infos)
 	if (ac == 6)
 		infos->repeat_eat = ft_atoi(av[5]);
 }
+int	check_that_arg(char *av)
+{
+	int	i;
+
+	i = 0;
+	while (av[i])
+	{
+		if ((av[i] < '0' || av[i] > '9') && (av[i] != '+'))
+			return (1);
+		if (i != 0 && av[i] == '+')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 int	check_input(t_infos *info, char **av)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (av[i])
 	{
 		if (check_that_arg(av[i]))
@@ -50,6 +65,13 @@ int	check_input(t_infos *info, char **av)
 		}
 		i++;
 	}
+	if (info->philo_nbr == 0 || info->to_die == 0
+		|| info->to_eat == 0 || info->to_sleep == 0)
+	{
+		write(2, "Zero? We don't Do This Here!\n", 29);
+		return (1);
+	}
+	return (0);
 }
 
 int main(int ac, char **av)
