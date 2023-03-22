@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/22 09:56:52 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/22 11:43:04 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	main(int ac, char **av)
 		init_times(ac, av, &infos);
 		if (check_input(&infos, av))
 			return (1);
+		creat_philosophers(&infos);
 	}
 	else
 	{
