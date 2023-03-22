@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:23:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/22 14:44:12 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/22 18:26:08 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_philo
 {
