@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:23:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/16 16:01:55 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/22 09:24:13 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@
 # include <stdlib.h>
 # include <pthread.h>
 
-typedef	struct s_times
+typedef	struct s_infos
 {
-	int				i;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				time_to_die;
-	pthread_mutex_t	mutex;
-}	t_time;
+	int	philo_nbr;
+	int	to_eat;
+	int	to_die;
+	int	to_sleep;
+	int	repeat_eat;
+	int	timer;
+}	t_infos;
 
 int		ft_atoi(const char *str);
 

@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:00:42 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/16 15:32:48 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/18 14:42:27 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*r1(void *x)
 {
 	philosopher *y = (philosopher *) x;
 	int i = -1;
-	while (++i < 10)
+	while (++i < 100)
 	{
 		printf("HI X=%d : %d\n", y->id, z++);
 		x++;
@@ -49,5 +49,6 @@ int main()
 		i++;
 	}
 	printf("hi %d\n", z);
+	return (0);
 	//while(1);
 }
