@@ -6,13 +6,12 @@
 #    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/16 15:01:56 by zasabri           #+#    #+#              #
-#    Updated: 2023/03/22 09:49:55 by zasabri          ###   ########.fr        #
+#    Updated: 2023/03/22 09:51:44 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	= ft_atoi.c\
 		philosopher.c\
-		error_generate.c\
 
 OBJS	= $(SRCS:.c=.o)
 
