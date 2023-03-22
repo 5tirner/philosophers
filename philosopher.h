@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:23:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/22 12:48:53 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/22 14:44:12 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,24 @@ typedef struct s_philo
 	unsigned long	eat;
 	int				last_meal;
 	struct s_infos	*info;
-	pthread_t		t;
 }	t_philo;
 
 typedef struct s_infos
 {
-	int		philo_nbr;
-	int		to_eat;
-	int		to_die;
-	int		to_sleep;
-	int		repeat_eat;
-	int		timer;
-	t_philo	philo[1000];
+	int				philo_nbr;
+	int				to_eat;
+	int				to_die;
+	int				to_sleep;
+	int				repeat_eat;
+	int				timer;
+	t_philo			philo[1000];
+	pthread_mutex_t	fork[1000];
+	pthread_mutex_t	meal;
+	pthread_mutex_t	out;
 }	t_infos;
 
 int		ft_atoi(const char *str);
 void	creat_philosophers(t_infos *info);
+int		manage_mutex(t_infos *info);
 
 #endif

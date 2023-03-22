@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   creat_philosophers.c                               :+:      :+:    :+:   */
+/*   manage_mutex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 10:00:59 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/22 14:52:54 by zasabri          ###   ########.fr       */
+/*   Created: 2023/03/22 13:10:15 by zasabri           #+#    #+#             */
+/*   Updated: 2023/03/22 14:53:27 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	creat_philosophers(t_infos *info)
+int	manage_mutex(t_infos *info)
 {
 	int	i;
-	int	ph_nb;
-	
+
 	i = info->philo_nbr;
-	ph_nb = info->philo_nbr;
 	while (i >= 1)
 	{
-		info->philo[i].pos = i;
-		info->philo[i].eat = 0;
-		info->philo[i].left = i;
-		if (i + 1 == ph_nb)
-			info->philo[i].right = ph_nb;
-		else
-			info->philo[i].right = (i + 1) % ph_nb;
-		info->philo[i].last_meal = 0;
-		//info->philo[i].info = info;
+		if (pthread_mutex_init(&info->fork[i], NULL))
+			return (1);
 		i--;
 	}
-	// i = info->philo_nbr;
-	// while (i >= 1)
-	// {
-	// 	printf("left_hand: %d | right_hand: %d\n", info->philo[i].left, info->philo[i].right);
-	// 	i--;
-	// }
+	if (pthread_mutex_init(&info->meal, NULL))
+		return (1);
+	if (pthread_mutex_init(&info->out, NULL))
+		return (1);
+	return (0);
 }
