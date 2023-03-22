@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/22 09:51:30 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/22 09:56:52 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_times(int ac, char **av, t_infos *infos)
 	if (ac == 6)
 		infos->repeat_eat = ft_atoi(av[5]);
 }
+
 int	check_that_arg(char *av)
 {
 	int	i;
@@ -74,10 +75,10 @@ int	check_input(t_infos *info, char **av)
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_infos	infos;
-	
+
 	if (ac == 5 || ac == 6)
 	{
 		init_times(ac, av, &infos);
@@ -85,5 +86,8 @@ int main(int ac, char **av)
 			return (1);
 	}
 	else
+	{
 		write(2, "Invalid Number Of Argements\n", 28);
+		return (1);
+	}
 }
