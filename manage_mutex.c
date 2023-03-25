@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 13:10:15 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/22 14:53:27 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/25 20:03:56 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	manage_mutex(t_infos *info)
 	}
 	if (pthread_mutex_init(&info->meal, NULL))
 		return (1);
-	if (pthread_mutex_init(&info->out, NULL))
+	if (pthread_mutex_init(&info->action, NULL))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/16 15:01:56 by zasabri           #+#    #+#              #
-#    Updated: 2023/03/22 13:10:43 by zasabri          ###   ########.fr        #
+#    Updated: 2023/03/25 19:58:40 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,12 @@ SRCS	= ft_atoi.c\
 		philosopher.c\
 		creat_philosophers.c\
 		manage_mutex.c\
+		activities.c\
+		action_generator.c\
 
 OBJS	= $(SRCS:.c=.o)
 
-PROG	= philosopher
+PROG	= philo
 
 CC		= cc
 
