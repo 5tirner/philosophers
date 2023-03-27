@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:00:59 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/25 20:36:11 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/27 21:20:23 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,26 @@ void	create_philosophers(t_infos *info)
 		info->philo[i].last_meal = 0;
 		i--;
 	}
+}
+
+int	launcher(t_infos *info)
+{
+	int				i;
+	t_philo			*philo;
+	struct timeval	t;
+	pthread_t		t1;
+
+	i = 0;
+	philo = info->philo;
+	gettimeofday(&t, NULL);
+	info->timer = (t.tv_sec * 1000) + (t.tv_usec / 1000);
+	while (i < info->philo_nbr)
+	{
+		gettimeofday(&t, NULL);
+		if (pthread_create(&philo[i].pos, NULL, &t1, &(philo[i])))
+			return (1);
+		philo[i].last_meal = (t.tv_sec * 1000) + (t.tv_usec / 1000);
+		i++;
+	}
+	return (0);
 }
