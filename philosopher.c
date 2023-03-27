@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/25 20:37:52 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/27 21:41:29 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	main(int ac, char **av)
 		if (check_input(&infos, av))
 			return (1);
 		create_philosophers(&infos);
+		if (start_working(&infos))
+			write(2, "Error When create some thread\n", 30);
 	}
 	else
 	{

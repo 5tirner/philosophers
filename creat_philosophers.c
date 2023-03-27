@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:00:59 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/27 21:20:23 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/27 21:40:16 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	create_philosophers(t_infos *info)
 	}
 }
 
-int	launcher(t_infos *info)
+int	start_working(t_infos *info)
 {
 	int				i;
 	t_philo			*philo;
