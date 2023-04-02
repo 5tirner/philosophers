@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 15:01:17 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/16 15:01:34 by zasabri          ###   ########.fr       */
+/*   Created: 2023/03/31 19:37:02 by zasabri           #+#    #+#             */
+/*   Updated: 2023/03/31 20:07:13 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "philo.h"
 
 static int	ft_sign(const char *str)
 {
@@ -42,7 +42,7 @@ int	ft_check_over(int sign)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+unsigned long	ft_atoi(const char *str)
 {
 	int					i;
 	int					sign;
@@ -67,5 +67,5 @@ int	ft_atoi(const char *str)
 		res = t;
 		i++;
 	}
-	return ((int) res * sign);
+	return (res * sign);
 }
