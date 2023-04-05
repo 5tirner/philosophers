@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 19:32:38 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/01 03:40:43 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/05 00:05:06 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <sys/time.h>
+
 typedef struct s_philos
 {
-	int	right;
-	int	left;
-	int	pos;
-	int	last_meal;
+	int				right;
+	int				left;
+	int				pos;
+	int				last_meal;
+	struct	s_infos	*infos;
+	
 }	t_philos;
 
 typedef struct s_infos

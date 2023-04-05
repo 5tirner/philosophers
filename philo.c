@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:32:01 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/01 00:31:53 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/05 00:12:23 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	philo_issues(t_infos *info)
 {
-	int	i;
+	int			i;
 
 	i = info->ph_nb - 1;
 	while (i >= 0)
@@ -25,12 +25,6 @@ void	philo_issues(t_infos *info)
 		info->philo[i].pos = i;
 		i--;
 	}
-	i = 0;
-	while (i < info->ph_nb)
-	{
-		printf("Right: %d | Left: %d\n", info->philo[i].right, info->philo[i].left);
-		i++;
-	}	
 }
 
 int	start_initialize(t_infos *info, char **av, int ac)
@@ -88,6 +82,7 @@ int	check_input(char **av)
 int main(int ac, char **av)
 {
 	t_infos		info;
+	t_philos	philo;
 
 	if (ac == 5 || ac == 6)
 	{
@@ -97,7 +92,6 @@ int main(int ac, char **av)
 			return (1);
 		info.philo = malloc(sizeof(t_philos) * info.ph_nb);
 		philo_issues(&info);
-		//info.forks = malloc(sizeof(t_philos) * info.ph_nb);
 	}
 	else
 		write(2, "Ivalid Number of Argements\n", 28);
