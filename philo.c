@@ -6,11 +6,30 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:32:01 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/05 00:12:23 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/07 00:29:40 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	initialize_mutex(t_infos *info)
+{
+	int	i;
+	
+	i = info->ph_nb - 1;
+	info->forks = malloc(sizeof(pthread_mutex_t) * info->ph_nb);
+	while (i > 0)
+	{
+		if (pthread_mutex_init(&info->forks[i], NULL))
+			return (1);
+		i--;
+	}
+	if (pthread_mutex_init(&info->meals, NULL))
+		return (1);
+	if (pthread_mutex_init(&info->rdwr, NULL))
+		return (1);
+	return (0);
+}
 
 void	philo_issues(t_infos *info)
 {
@@ -36,7 +55,7 @@ int	start_initialize(t_infos *info, char **av, int ac)
 	info->eat = ft_atoi(av[3]);
 	info->sleep = ft_atoi(av[4]);
 	if (info->die < 60 || info->eat < 60 || info->sleep < 60)
-		return (printf("Enter Times more or equal 60ms\n"));
+		return (printf("Enter Times More Or Equal 60ms\n"));
 	if (ac == 5)
 		info->m_nbr = -1;
 	else
@@ -92,6 +111,8 @@ int main(int ac, char **av)
 			return (1);
 		info.philo = malloc(sizeof(t_philos) * info.ph_nb);
 		philo_issues(&info);
+		if (initialize_mutex(&info))
+			return (printf("Init Mutex Failed\n"));
 	}
 	else
 		write(2, "Ivalid Number of Argements\n", 28);
