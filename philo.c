@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:32:01 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/07 00:29:40 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/10 03:11:08 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,12 @@ int main(int ac, char **av)
 		philo_issues(&info);
 		if (initialize_mutex(&info))
 			return (printf("Init Mutex Failed\n"));
+		int i = 0;
+		while (i < info.ph_nb)
+		{
+			printf("philo %d: right %d left %d\n", i, info.philo[i].right, info.philo[i].left);
+			i++;
+		}
 	}
 	else
 		write(2, "Ivalid Number of Argements\n", 28);
