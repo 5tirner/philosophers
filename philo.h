@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 19:32:38 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/12 21:46:30 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/13 14:57:06 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ typedef struct s_infos
 	unsigned long	sleep;
 	unsigned long	die;
 	unsigned long	m_nbr;
+	int				right;
+	int				left;
+	int				pos;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	write;
 }	t_infos;
 
 unsigned long	ft_atoi(const char *str);
