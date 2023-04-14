@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/13 15:26:19 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/14 00:53:56 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,20 @@ void *philosopher(void *args)
 	{
 		pthread_mutex_lock(&info->write);
 		printf("Philosopher %d is taken a fork\n", info->pos);  
+		printf("Philosopher %d is taken a fork\n", info->pos);
 		pthread_mutex_unlock(&info->write);
 		pthread_mutex_lock(&info->forks[right]);
 		pthread_mutex_lock(&info->forks[left]); 
 		pthread_mutex_lock(&info->write); 
 		printf("Philosopher %d is eating\n", info->pos);
+		usleep(info->eat);
 		pthread_mutex_unlock(&info->write);
-		sleep(info->eat);
 		pthread_mutex_unlock(&info->forks[left]);
 		pthread_mutex_unlock(&info->forks[right]);
 		pthread_mutex_lock(&info->write);
 		printf("Philosopher %d is sleeping\n", info->pos);
+		usleep(info->sleep);
 		pthread_mutex_unlock(&info->write);
-		sleep(info->sleep);
 	}
 } 
 
@@ -116,10 +117,10 @@ int main(int ac, char **av)
 		}
 		t = malloc(sizeof(pthread_t) * info.ph_nb);
 		i = -1;
-		while (++i < info.ph_nb)
+		while (++i <= info.ph_nb)
 		{
-			info.pos = i + 1;
-			usleep(50);
+			info.pos = i;
+			usleep(120000);
 			if (pthread_create(&t[i], NULL, philosopher, &info))
 				return (printf("Thread creat failed\n"));
 		}
