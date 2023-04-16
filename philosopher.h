@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:23:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/16 00:22:30 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/16 17:54:53 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ typedef struct s_infos
 	int				meals_nbr;
 	time_t			*lastmeal;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	*write;
+	pthread_mutex_t	write;
+	pthread_mutex_t	increment;
 }					t_infos;
 
 unsigned long	ft_atoi(const char *str);
+int				check_input(char **av);
+int				initialize_input(char **argv, int argc, t_infos *info);
 
 #endif
