@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/16 00:41:02 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/16 03:26:36 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,20 @@ void	*philosopher(void *arg)
 	left = info->fork + ((pos + 1) % info->philo_nbr);
 	while (1)
 	{
+		pthread_mutex_lock(left);
+		pthread_mutex_lock(info->write);
+		printf("%ld: philo %d has taken a fork\n", time_generate(), pos + 1);
+		pthread_mutex_unlock(info->write);
 		pthread_mutex_lock(right);
 		pthread_mutex_lock(info->write);
 		printf("%ld: philo %d has taken a fork\n", time_generate(), pos + 1);
 		pthread_mutex_unlock(info->write);
-		pthread_mutex_lock(left);
 		info->lastmeal[pos] = time_generate();
 		pthread_mutex_lock(info->write);
 		printf("%ld: philo %d is eating\n", time_generate(), pos + 1);
 		pthread_mutex_unlock(info->write);
-		pthread_mutex_unlock(right);
 		pthread_mutex_unlock(left);
+		pthread_mutex_unlock(right);
 		activities(info, right, left, pos);
 	}
 	return (NULL);
@@ -195,7 +198,7 @@ int	main(int ac, char **av)
 			info.lastmeal[i] = time_generate();
 			if (pthread_create(&philo[i], NULL, &philosopher, &info))
 				return (printf("Error in pthread_creat\n"));
-			usleep(100);
+			usleep(500);
 			i++;
 		}
 		return (stop(&info));
