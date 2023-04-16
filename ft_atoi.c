@@ -6,11 +6,11 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 19:37:02 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/31 20:07:13 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/15 23:38:38 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philosopher.h"
 
 static int	ft_sign(const char *str)
 {
