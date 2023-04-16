@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:23:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/16 17:54:53 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/16 23:21:14 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ typedef struct s_infos
 unsigned long	ft_atoi(const char *str);
 int				check_input(char **av);
 int				initialize_input(char **argv, int argc, t_infos *info);
+int				stop(t_infos *info);
+time_t			time_generate(void);
 
 #endif
