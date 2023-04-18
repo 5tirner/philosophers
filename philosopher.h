@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:23:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/17 22:55:56 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/18 22:29:31 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_infos
 	int				philo_nbr;
 	int				meals_nbr;
 	time_t			*lastmeal;
+	time_t			t_zero;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	write;
 	pthread_mutex_t	increment;
@@ -39,5 +40,7 @@ int				check_input(char **av);
 int				initialize_input(char **argv, int argc, t_infos *info);
 int				stop(t_infos *info);
 time_t			time_generate(void);
+void			take_forks(t_infos *info, pthread_mutex_t *r,
+					pthread_mutex_t *l, int p);
 
 #endif

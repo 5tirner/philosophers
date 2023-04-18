@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/17 22:55:49 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/18 22:47:56 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ void	take_break(int ts)
 
 void	activities(t_infos *info, pthread_mutex_t *r, pthread_mutex_t *l, int p)
 {
+	take_break(info->time_to_eat);
 	pthread_mutex_lock(&info->increment);
 	info->meals_nbr++;
 	pthread_mutex_unlock(&info->increment);
-	take_break(info->time_to_eat);
 	pthread_mutex_unlock(l);
 	pthread_mutex_unlock(r);
 	pthread_mutex_lock(&info->write);
-	printf("%ld: philo %d is sleeping\n", time_generate(), p + 1);
+	printf("%ldms philo %d is sleeping\n", time_generate() - info->t_zero, p + 1);
 	pthread_mutex_unlock(&info->write);
 	take_break(info->time_to_sleep);
 	pthread_mutex_lock(&info->write);
-	printf("%ld: philo %d is thinking\n", time_generate(), p + 1);
+	printf("%ldms philo %d is thinking\n", time_generate() - info->t_zero, p + 1);
 	pthread_mutex_unlock(&info->write);
 }
 
@@ -44,6 +44,7 @@ void	*philosopher(void *arg)
 	pthread_mutex_t	*right;
 	pthread_mutex_t	*left;
 	int				pos;
+	time_t			time;
 
 	info = (t_infos *)arg;
 	pos = info->id;
@@ -51,18 +52,16 @@ void	*philosopher(void *arg)
 	left = info->fork + ((pos + 1) % info->philo_nbr);
 	while (1)
 	{
-		pthread_mutex_lock(left);
+		take_forks(info, right, left, pos);
+		pthread_mutex_lock(&info->increment);
+		time = time_generate() - info->t_zero;
+		pthread_mutex_unlock(&info->increment);
 		pthread_mutex_lock(&info->write);
-		printf("%ld: philo %d has taken a fork\n", time_generate(), pos + 1);
+		printf("%ldms philo %d is eating\n", time, pos + 1);
 		pthread_mutex_unlock(&info->write);
-		pthread_mutex_lock(right);
-		pthread_mutex_lock(&info->write);
-		printf("%ld: philo %d has taken a fork\n", time_generate(), pos + 1);
-		pthread_mutex_unlock(&info->write);
-		info->lastmeal[pos] = time_generate();
-		pthread_mutex_lock(&info->write);
-		printf("%ld: philo %d is eating\n", time_generate(), pos + 1);
-		pthread_mutex_unlock(&info->write);
+		pthread_mutex_lock(&info->increment);
+		info->lastmeal[pos] = time_generate() - info->t_zero;
+		pthread_mutex_unlock(&info->increment);
 		activities(info, right, left, pos);
 	}
 }
@@ -72,6 +71,7 @@ int	initialize_mutex(t_infos *info)
 	int	i;
 
 	i = 0;
+	info->t_zero = time_generate();
 	info->fork = malloc(sizeof(pthread_mutex_t) * info->philo_nbr);
 	info->lastmeal = malloc(sizeof(time_t) * info->philo_nbr);
 	pthread_mutex_init(&info->write, NULL);
