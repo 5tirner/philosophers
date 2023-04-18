@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/18 22:47:56 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/18 23:46:27 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ void	activities(t_infos *info, pthread_mutex_t *r, pthread_mutex_t *l, int p)
 	pthread_mutex_unlock(l);
 	pthread_mutex_unlock(r);
 	pthread_mutex_lock(&info->write);
-	printf("%ldms philo %d is sleeping\n", time_generate() - info->t_zero, p + 1);
+	printf("%ldms philo %d is sleeping\n",
+		time_generate() - info->t_zero, p + 1);
 	pthread_mutex_unlock(&info->write);
 	take_break(info->time_to_sleep);
 	pthread_mutex_lock(&info->write);
-	printf("%ldms philo %d is thinking\n", time_generate() - info->t_zero, p + 1);
+	printf("%ldms philo %d is thinking\n",
+		time_generate() - info->t_zero, p + 1);
 	pthread_mutex_unlock(&info->write);
 }
 
