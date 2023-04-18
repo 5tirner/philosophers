@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:15:28 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/17 20:14:27 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/17 22:58:48 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	destroy_mutexes(t_infos *info)
 	pthread_mutex_destroy(&info->increment);
 }
 
-int	stop(t_infos *info)
+int	stop(t_infos *p)
 {
 	time_t	t;
 	int		i;
@@ -35,21 +35,20 @@ int	stop(t_infos *info)
 	{
 		i = 0;
 		t = time_generate();
-		while (i < info->philo_nbr)
+		while (i < p->philo_nbr)
 		{
-			if (info->meals != -1
-				&& info->meals_nbr >= (info->meals * info->philo_nbr))
+			if (p->meals != -1 && p->meals_nbr >= (p->meals * p->philo_nbr))
 			{
-				destroy_mutexes(info);
+				destroy_mutexes(p);
 				return (0);
 			}
-			if (t - info->lastmeal[i] > info->time_to_die)
+			if (t - p->lastmeal[i] > p->time_to_die)
 			{		
-				pthread_mutex_lock(&info->write);
+				pthread_mutex_lock(&p->write);
 				printf("%ld: philo %d is died\n", time_generate(), i + 1);
-				pthread_mutex_unlock(&info->write);
-				destroy_mutexes(info);
-				return (0);
+				pthread_mutex_unlock(&p->write);
+				destroy_mutexes(p);
+				return (1);
 			}
 			i++;
 		}
