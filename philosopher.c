@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/19 21:31:21 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/19 22:47:07 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	take_break(int ts)
 
 	t0 = time_generate();
 	while (time_generate() - t0 < ts)
-		usleep(500);
+		usleep(100);
 }
 
 void	activities(t_infos *info, pthread_mutex_t *r, pthread_mutex_t *l, int p)
@@ -92,7 +92,7 @@ int	initialize_mutex(t_infos *info)
 int	main(int ac, char **av)
 {
 	pthread_t	*philo;
-	t_infos		info;
+	t_infos		*info;
 	int			i;
 
 	if (ac == 5 || ac == 6)
@@ -100,20 +100,22 @@ int	main(int ac, char **av)
 		i = -1;
 		if (check_input(av))
 			return (1);
-		if (initialize_input(av, ac, &info))
+		info = malloc(sizeof(t_infos));
+		if (initialize_input(av, ac, info))
 			return (1);
-		if (initialize_mutex(&info))
+		if (initialize_mutex(info))
 			return (1);
-		philo = malloc(sizeof(pthread_t) * info.philo_nbr);
-		while (++i < info.philo_nbr)
+		philo = malloc(sizeof(pthread_t) * info->philo_nbr);
+		while (++i < info->philo_nbr)
 		{
-			info.id = i;
-			info.lastmeal[i] = time_generate();
-			if (pthread_create(&philo[i], NULL, &philosopher, &info))
+			info->id = i;
+			info->lastmeal[i] = time_generate();
+			if (pthread_create(&philo[i], NULL, &philosopher, info))
 				return (printf("Error in pthread_create\n"));
-			usleep(500);
+			usleep(100);
 		}
-		return (stop(&info));
+		stop(info);
 	}
-	return (printf("Ilegal numbre of argements\n"));
+	else
+		return (printf("Ilegal numbre of argements\n"));
 }
