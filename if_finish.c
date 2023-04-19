@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:15:28 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/18 23:16:04 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/19 02:28:21 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,20 @@ void	destroy_mutexes(t_infos *info)
 
 int	stop(t_infos *p)
 {
-	time_t	t;
 	int		i;
 
 	while (1)
 	{
 		i = -1;
-		t = time_generate() - p->t_zero;
 		while (++i < p->philo_nbr)
 		{
 			if (p->meals != -1 && p->meals_nbr >= (p->meals * p->philo_nbr))
 				return (0);
-			if (t - p->lastmeal[i] > p->time_to_die)
+			if (time_generate() - p->lastmeal[i] > p->time_to_die)
 			{		
 				pthread_mutex_lock(&p->write);
 				printf("%ldms philo %d is died\n",
-					time_generate() - p->t_zero, i + 1);
+					time_generate(), i + 1);
 				pthread_mutex_unlock(&p->write);
 				return (1);
 			}

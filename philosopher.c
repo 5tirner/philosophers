@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/18 23:46:27 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/19 02:21:44 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	activities(t_infos *info, pthread_mutex_t *r, pthread_mutex_t *l, int p)
 	pthread_mutex_unlock(r);
 	pthread_mutex_lock(&info->write);
 	printf("%ldms philo %d is sleeping\n",
-		time_generate() - info->t_zero, p + 1);
+		time_generate(), p + 1);
 	pthread_mutex_unlock(&info->write);
 	take_break(info->time_to_sleep);
 	pthread_mutex_lock(&info->write);
 	printf("%ldms philo %d is thinking\n",
-		time_generate() - info->t_zero, p + 1);
+		time_generate(), p + 1);
 	pthread_mutex_unlock(&info->write);
 }
 
@@ -46,7 +46,6 @@ void	*philosopher(void *arg)
 	pthread_mutex_t	*right;
 	pthread_mutex_t	*left;
 	int				pos;
-	time_t			time;
 
 	info = (t_infos *)arg;
 	pos = info->id;
@@ -55,14 +54,12 @@ void	*philosopher(void *arg)
 	while (1)
 	{
 		take_forks(info, right, left, pos);
-		pthread_mutex_lock(&info->increment);
-		time = time_generate() - info->t_zero;
-		pthread_mutex_unlock(&info->increment);
 		pthread_mutex_lock(&info->write);
-		printf("%ldms philo %d is eating\n", time, pos + 1);
+		printf("%ldms philo %d is eating\n",
+			time_generate(), pos + 1);
 		pthread_mutex_unlock(&info->write);
 		pthread_mutex_lock(&info->increment);
-		info->lastmeal[pos] = time_generate() - info->t_zero;
+		info->lastmeal[pos] = time_generate();
 		pthread_mutex_unlock(&info->increment);
 		activities(info, right, left, pos);
 	}

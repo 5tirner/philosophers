@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:23:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/18 22:29:31 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/19 00:18:08 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int				stop(t_infos *info);
 time_t			time_generate(void);
 void			take_forks(t_infos *info, pthread_mutex_t *r,
 					pthread_mutex_t *l, int p);
+void			take_break(int ts);
 
 #endif
