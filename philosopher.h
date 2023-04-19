@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:23:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/19 00:18:08 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/19 21:21:05 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_infos
 	int				meals_nbr;
 	time_t			*lastmeal;
 	time_t			t_zero;
+	int				all_eat;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	write;
 	pthread_mutex_t	increment;
