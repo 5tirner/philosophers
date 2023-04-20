@@ -6,7 +6,7 @@
 #    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 23:34:17 by zasabri           #+#    #+#              #
-#    Updated: 2023/04/20 04:03:19 by zasabri          ###   ########.fr        #
+#    Updated: 2023/04/20 04:59:12 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ SRC		= philosopher.c\
 		check_input.c\
 		ft_atoi.c\
 		take_forks.c\
+		create_threads.c\
 		timer.c\
 		if_finish.c\
 		
@@ -23,7 +24,7 @@ RM		= rm -rf
 
 CC		= cc
 
-CFLAGS	= -Wall -Wextra -Werror -pthread -fsanitize=thread -g
+CFLAGS	= -Wall -Wextra -Werror -pthread #-fsanitize=thread -g
 
 PROG	= philo
 

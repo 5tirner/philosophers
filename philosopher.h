@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:23:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/20 01:20:20 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/20 04:58:00 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ time_t			time_generate(void);
 void			take_forks(t_infos *info, pthread_mutex_t *r,
 					pthread_mutex_t *l, int p);
 void			take_break(int ts);
+int				creat_threads(t_infos *info, pthread_t *philo);
+void			*philosopher(void *arg);
 
 #endif

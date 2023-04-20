@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/20 04:47:23 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/20 05:00:20 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,27 +97,18 @@ int	main(int ac, char **av)
 	t_infos		*info;
 	int			i;
 
-	if (ac == 5 || ac == 6)
-	{
-		i = -1;
-		if (check_input(av))
-			return (1);
-		info = malloc(sizeof(t_infos));
-		if (initialize_input(av, ac, info))
-			return (1);
-		if (initialize_mutex(info))
-			return (1);
-		philo = malloc(sizeof(pthread_t) * info->philo_nbr);
-		while (++i < info->philo_nbr)
-		{
-			pthread_mutex_lock(&info->increment);
-			info->id = i;
-			info->lastmeal[i] = time_generate();
-			pthread_mutex_unlock(&info->increment);
-			if (pthread_create(&philo[i], NULL, &philosopher, info))
-				return (printf("Error in pthread_create\n"));
-			usleep(100);
-		}
-		return (stop(info));
-	}
+	if (ac != 5 && ac != 6)
+		return (printf("Ilegal number of Args\n"));
+	i = -1;
+	if (check_input(av))
+		return (1);
+	info = malloc(sizeof(t_infos));
+	if (initialize_input(av, ac, info))
+		return (1);
+	if (initialize_mutex(info))
+		return (1);
+	philo = malloc(sizeof(pthread_t) * info->philo_nbr);
+	if (creat_threads(info, philo))
+		return (1);
+	return (stop(info));
 }
