@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/20 04:16:25 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/20 01:24:46 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ void	*philosopher(void *arg)
 	int				pos;
 
 	info = (t_infos *)arg;
-	pthread_mutex_lock(&info->increment);
 	pos = info->id;
-	pthread_mutex_unlock(&info->increment);
 	right = info->fork + pos;
 	left = info->fork + ((pos + 1) % info->philo_nbr);
 	while (1)
@@ -110,10 +108,8 @@ int	main(int ac, char **av)
 		philo = malloc(sizeof(pthread_t) * info->philo_nbr);
 		while (++i < info->philo_nbr)
 		{
-			pthread_mutex_lock(&info->increment);
 			info->id = i;
 			info->lastmeal[i] = time_generate();
-			pthread_mutex_unlock(&info->increment);
 			if (pthread_create(&philo[i], NULL, &philosopher, info))
 				return (printf("Error in pthread_create\n"));
 			usleep(100);
