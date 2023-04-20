@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:55 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/19 22:47:07 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/20 01:24:46 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@ int	main(int ac, char **av)
 				return (printf("Error in pthread_create\n"));
 			usleep(100);
 		}
-		stop(info);
+		return (stop(info));
 	}
-	else
-		return (printf("Ilegal numbre of argements\n"));
 }

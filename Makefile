@@ -6,7 +6,7 @@
 #    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 23:34:17 by zasabri           #+#    #+#              #
-#    Updated: 2023/04/19 22:48:29 by zasabri          ###   ########.fr        #
+#    Updated: 2023/04/20 01:21:42 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ RM		= rm -rf
 
 CC		= cc
 
-CFLAGS	= -Wall -Wextra -Werror -pthread -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -pthread #-fsanitize=thread
 
 PROG	= philo
 
