@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:15:28 by zasabri           #+#    #+#             */
-/*   Updated: 2023/04/20 04:19:23 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/04/21 00:08:25 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	stop(t_infos *p)
 		i = -1;
 		while (++i < p->philo_nbr)
 		{
+			pthread_mutex_lock(&p->increment);
 			if (p->all_eat && p->meals_nbr > p->all_eat)
 				return (0);
-			pthread_mutex_lock(&p->increment);
 			if (time_generate() - p->lastmeal[i] > p->time_to_die)
 			{	
 				pthread_mutex_lock(&p->write);
